@@ -33,3 +33,5 @@ Route::resource('forum','Prueba2Controller');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/forums/{forum}', 'ForumController@show');

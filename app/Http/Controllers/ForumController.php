@@ -8,11 +8,18 @@ use App\Forum;
 class ForumController extends Controller
 {
     public function index()
-        {
-            //$forums = Forum::all();
-            $forums = Forum::latest()->paginate(5);
-            //dd($forums);
-            return view('forums.index',compact("forums"));
-        }
+    {
+        //$forums = Forum::all();
+        $forums = Forum::latest()->paginate(5);
+        //dd($forums);
+        return view('forums.index',compact("forums"));
+    }
+
+    public function show(Forum $forum)  // Con esto estamos inyectando el Foro completo
+	{
+        $posts = $forum->posts()->with(['owner'])->paginate(2);
+		//dd($forum);
+        return view('forums.detail', compact('forum','posts'));
+	}
 
 }

@@ -15,7 +15,7 @@ class CreateForumsTable extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->engine = "InnoDB";   	// Esto permite escribir Relaciones y Claves Foráneas 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');		// Nombre del Foro
             $table->text('description');	// Descripción del Foro
             $table->timestamps();
