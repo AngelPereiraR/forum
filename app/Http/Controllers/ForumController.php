@@ -10,7 +10,7 @@ class ForumController extends Controller
     public function index()
     {
         //$forums = Forum::all();
-        $forums = Forum::latest()->paginate(5);
+        $forums = Forum::with(['replies', 'posts'])->paginate(5);
         //dd($forums);
         return view('forums.index',compact("forums"));
     }

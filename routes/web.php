@@ -16,6 +16,7 @@
 }); */
 
 Route::get('/', 'ForumController@index');
+Route::get('/forums/{forum}', 'ForumController@show');
 
 Route::get('/hola', function () {
     return 'Hola';
@@ -34,4 +35,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/forums/{forum}', 'ForumController@show');
+Route::get('/posts/{post}', 'PostController@show');
+
