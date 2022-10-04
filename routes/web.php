@@ -33,8 +33,8 @@ Route::get('name/{name}', 'PruebaController@nombre');
 Route::resource('forum','Prueba2Controller');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/posts/{post}', 'PostController@show');
 
 Route::post('/forums', 'ForumController@store');
+
+Route::post('/posts', 'PostController@store');
