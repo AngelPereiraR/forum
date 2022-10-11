@@ -3,11 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = ['id','user_id','forum_id','title','description'];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function($post) {
+            if( ! App::runningInConsole() ) {
+                $post->user_id = auth()->id();
+            }        
+        });
+    }
+
 
     public function forum(){
     	return $this->belongsTo(Forum::class, 'forum_id');
