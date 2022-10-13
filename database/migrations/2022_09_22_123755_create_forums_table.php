@@ -17,6 +17,8 @@ class CreateForumsTable extends Migration
             $table->engine = "InnoDB";   	// Esto permite escribir Relaciones y Claves Foráneas 
             $table->bigIncrements('id');
             $table->string('name');		// Nombre del Foro
+            $table->string('slug');
+            $table->index('slug');
             $table->text('description');	// Descripción del Foro
             $table->timestamps();
 

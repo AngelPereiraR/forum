@@ -15,9 +15,6 @@
     return view('welcome');
 }); */
 
-Route::get('/', 'ForumController@index');
-Route::get('/forums/{forum}', 'ForumController@show');
-
 Route::get('/hola', function () {
     return 'Hola';
 });
@@ -33,10 +30,13 @@ Route::get('name/{name}', 'PruebaController@nombre');
 Route::resource('forum','Prueba2Controller');
 Auth::routes();
 
-Route::get('/posts/{post}', 'PostController@show');
-
+Route::get('/', 'ForumController@index');
+Route::get('/forums/{forum}', 'ForumController@show');
 Route::post('/forums', 'ForumController@store');
 
+Route::get('/posts/{post}', 'PostController@show');
 Route::post('/posts', 'PostController@store');
+Route::delete('/posts/{post}', 'PostController@destroy');
 
 Route::post('/replies', 'ReplyController@store');
+Route::delete('/replies/{reply}', 'ReplyController@destroy')->name('replies.delete');

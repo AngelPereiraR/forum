@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class Reply extends Model
 {
@@ -24,6 +25,15 @@ class Reply extends Model
                 $reply->user_id = auth()->id();
             }
         });
+
+        /* static::deleting(function($reply) {
+            if( ! App::runningInConsole() ) {
+                if($reply->attachment) {
+                    Storage::delete('replies/' . $reply->attachment);
+                }
+            }
+        }); */
+    
     }	
 
 
@@ -41,5 +51,9 @@ class Reply extends Model
     public function getForumAttribute() {
     	return $this->post->forum;
     }
+
+    public function isAuthor() {
+        return $this->autor->id === auth()->id();
+}
 
 }

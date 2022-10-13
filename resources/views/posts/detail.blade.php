@@ -8,7 +8,7 @@
         
         <h4>{{ __("Autor del debate") }}: {{ $post->owner->name }}</h4>
 	
-        <a href="../forums/{{ $post->forum->id }}" class="btn btn-info pull-right">
+        <a href="../forums/{{ $post->forum->slug }}" class="btn btn-info pull-right">
             {{ __ ("Volver al foro :name",  ['name' => $post->forum->name]) }}
         </a>
     
@@ -28,6 +28,18 @@
 	                {{ $reply->reply }}
 	            </div>
 	        </div>
+            
+            @if($reply->isAuthor())
+                <div class="panel-footer">
+                    <form method="POST" action="{{ route('replies.delete', [$reply->id]) }}">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" name="deleteReply" class="btn btn-danger">
+                            {{ __("Eliminar respuesta") }}
+                        </button>
+                    </form>
+                </div>
+            @endif
 
     	@empty
 
@@ -59,7 +71,6 @@
         @else
             @include('partials.login_link', ['message' => __("Inicia sessión para responder")])
         @endLogged()
-
 
     </div>
 </div>
